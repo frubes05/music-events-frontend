@@ -36,7 +36,7 @@ export async function getStaticProps() {
     leadspace = await leadspaceResponse.json();
     leadspace = leadspace.data;
   } catch (error) {
-    throw new Error(error.message);
+    
   }
   return {
     props: {

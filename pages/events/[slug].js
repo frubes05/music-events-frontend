@@ -75,7 +75,6 @@ try {
   event = await response.json();
   event = event.data[0].attributes;
 } catch (error) {
-  throw new Error(error.message);
 }
 
 return {

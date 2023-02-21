@@ -39,7 +39,6 @@ export async function getServerSideProps({ query: { page=1 }}) {
     const eventsData = await eventRes.json();
     allEvents = eventsData?.data;
   } catch (error) {
-    throw new Error(error.message);
   }
   return {
     props: {

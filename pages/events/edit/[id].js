@@ -183,7 +183,6 @@ export async function getServerSideProps({ query: { id } }) {
     );
     event = await res.json();
   } catch (error) {
-    throw new Error(error.message);
   }
 
   return {
