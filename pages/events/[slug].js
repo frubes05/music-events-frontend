@@ -68,52 +68,12 @@ const EventPage = ({ event, eventId }) => {
 
 export default EventPage;
 
-export async function getStaticPaths() {
-  let events;
-  try {
-    const res = await fetch(`https://music-events-backend.onrender.com/api/events?populate=*`);
-    events = await res.json();
-    events = events.data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-  const paths = events.map((evt) => ({
-    params: { slug: evt.attributes.slug },
-  }));
-  return {
-    paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ params: { slug } }) {
-  let event;
-  let eventId;
-  try {
-    const url = `https://music-events-backend.onrender.com/api/events?filters[slug][$eq]=${slug}&populate=*`;
-    const response = await fetch(url);
-    event = await response.json();
-    eventId = event
-    eventId = eventId.data[0].id;
-    event = event.data[0].attributes;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-
-  return {
-    props: {
-      event,
-      eventId
-    },
-    revalidate: 1,
-  };
-}
-
-/*export async function getServerSideProps({query: { slug }}) {
+export async function getServerSideProps({query: { slug }}) {
   let event;
 try {
-  const response = await fetch(`http://localhost:3000/api/events/${slug}`);
+  const response = await fetch(`https://music-events-backend.onrender.com/api/events?filters[slug][$eq]=${slug}&populate=*`);
   event = await response.json();
+  event = event.data[0].attributes;
 } catch (error) {
   throw new Error(error.message);
 }
@@ -123,4 +83,4 @@ return {
     event
   }
 };
-}*/
+}
