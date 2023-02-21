@@ -12,7 +12,7 @@ const EventPage = ({ event, eventId }) => {
   const router = useRouter();
   const format = useMemo(() => event?.image?.data?.attributes?.formats, []);
   const deleteEvent = async () => {
-    const res = await fetch(`http://localhost:1337/api/events/${eventId}`, {
+    const res = await fetch(`https://music-events-backend.onrender.com/api/events/${eventId}`, {
       method: "DELETE",
     });
 
@@ -71,7 +71,7 @@ export default EventPage;
 export async function getStaticPaths() {
   let events;
   try {
-    const res = await fetch(`http://localhost:1337/api/events?populate=*`);
+    const res = await fetch(`https://music-events-backend.onrender.com/api/events?populate=*`);
     events = await res.json();
     events = events.data;
   } catch (error) {
@@ -90,7 +90,7 @@ export async function getStaticProps({ params: { slug } }) {
   let event;
   let eventId;
   try {
-    const url = `http://localhost:1337/api/events?filters[slug][$eq]=${slug}&populate=*`;
+    const url = `https://music-events-backend.onrender.com/api/events?filters[slug][$eq]=${slug}&populate=*`;
     const response = await fetch(url);
     event = await response.json();
     eventId = event

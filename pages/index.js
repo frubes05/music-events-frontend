@@ -25,13 +25,13 @@ export async function getStaticProps() {
   let leadspace;
   try {
     const response = await fetch(
-      "http://localhost:1337/api/events?_sort=date:ASC&_limit=3&populate=*"
+      "https://music-events-backend.onrender.com/api/events?_sort=date:ASC&_limit=3&populate=*"
     );
     events = await response.json();
     events = events.data;
 
     const leadspaceResponse = await fetch(
-      "http://localhost:1337/api/leadspaces?populate=*"
+      "https://music-events-backend.onrender.com/api/leadspaces?populate=*"
     );
     leadspace = await leadspaceResponse.json();
     leadspace = leadspace.data;

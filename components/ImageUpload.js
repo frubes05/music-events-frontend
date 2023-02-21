@@ -12,7 +12,7 @@ const ImageUpload = ({ eventId, imageUploaded }) => {
     formData.append('refId', eventId.toString());
     formData.append('field', 'image');
 
-    const res = await fetch(`http://localhost:1337/api/upload`, {
+    const res = await fetch(`https://music-events-backend.onrender.com/api/upload`, {
         method: 'POST',
         body: formData,
     })

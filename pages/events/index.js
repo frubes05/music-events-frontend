@@ -31,11 +31,11 @@ export async function getServerSideProps({ query: { page=1 }}) {
   let events;
   let allEvents;
   try {
-    const response = await fetch(`http://localhost:1337/api/events?pagination[page]=${page}&pagination[pageSize]=2&_sort=date:ASC&populate=*`);
+    const response = await fetch(`https://music-events-backend.onrender.com/api/events?pagination[page]=${page}&pagination[pageSize]=2&_sort=date:ASC&populate=*`);
     events = await response.json();
     events = events.data;
 
-    const eventRes = await fetch(`http://localhost:1337/api/events`) 
+    const eventRes = await fetch(`https://music-events-backend.onrender.com/api/events`) 
     const eventsData = await eventRes.json();
     allEvents = eventsData?.data;
   } catch (error) {
@@ -45,7 +45,7 @@ export async function getServerSideProps({ query: { page=1 }}) {
     props: {
       events,
       page: +page,
-      total: allEvents.length
+      total: allEvents?.length
     }
   }
 }

@@ -50,7 +50,7 @@ export async function getServerSideProps({ query: { term } }) {
   let events;
   try {
     const response = await fetch(
-      `http://localhost:1337/api/events?${query}&populate=*`
+      `https://music-events-backend.onrender.com/api/events?${query}&populate=*`
     );
     events = await response.json();
     events = events.data;

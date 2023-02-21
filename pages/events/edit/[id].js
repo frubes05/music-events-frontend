@@ -37,7 +37,7 @@ const EditEventsPage = ({ event, id }) => {
       toast.error("Please fill in all fields!");
     }
 
-    const res = await fetch(`http://localhost:1337/api/events/${id}`, {
+    const res = await fetch(`https://music-events-backend.onrender.com/api/events/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const EditEventsPage = ({ event, id }) => {
   };
 
   const imageUploaded = async(e) => {
-    const res = await fetch(`http://localhost:1337/api/events/${id}?populate=*`);
+    const res = await fetch(`https://music-events-backend.onrender.com/api/events/${id}?populate=*`);
     const event = await res.json();
     setImagePreview(event.data?.attributes.image.data?.attributes.formats ? event.data?.attributes.image.data?.attributes.formats.thumbnail.url : event.data?.attributes.image.data?.attributes.url);
     setShowModal(false);
@@ -179,7 +179,7 @@ export async function getServerSideProps({ params: { id } }) {
   let event;
   try {
     const res = await fetch(
-      `http://localhost:1337/api/events/${id}?populate=*`
+      `https://music-events-backend.onrender.com/api/events/${id}?populate=*`
     );
     event = await res.json();
   } catch (error) {

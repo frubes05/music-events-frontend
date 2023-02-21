@@ -27,7 +27,7 @@ const AddEventsPage = () => {
       toast.error('Please fill in all fields!')
     }
     
-    const res = await fetch('http://localhost:1337/api/events', {
+    const res = await fetch('https://music-events-backend.onrender.com/api/events', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
