@@ -45,7 +45,7 @@ const EventPage = ({ event, eventId }) => {
           <div className={styles.image}>
             <Image
               alt="image"
-              src={!format ? event.image.data?.attributes.url : format?.small.url}
+              src={event.image.data?.attributes.url}
               width={960}
               height={600}
             />

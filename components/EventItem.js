@@ -4,14 +4,14 @@ import Image from "next/image";
 import styles from "@/components/EventItem.module.css";
 
 const EventItem = ({ evt, id }) => {
-  const format = useMemo(() => evt.image?.data?.attributes.formats, [])
+  const format = useMemo(() => evt.image?.data?.attributes.formats, []);
 
   return (
     <div className={styles.event}>
       <div className={styles.img}>
         <Image
           alt= 'image'
-          src={!format ? evt.image.data?.attributes.url : format?.small.url}
+          src={evt.image.data?.attributes.url}
           width={170}
           height={100}
         />
