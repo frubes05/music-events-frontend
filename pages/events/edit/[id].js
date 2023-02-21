@@ -12,17 +12,17 @@ import ImageUpload from "@/components/ImageUpload";
 
 const EditEventsPage = ({ event, id }) => {
   const [values, setValues] = useState({
-    name: event.data.attributes.name,
-    performers: event.data.attributes.performers,
-    venue: event.data.attributes.venue,
-    address: event.data.attributes.address,
-    date: event.data.attributes.date,
-    time: event.data.attributes.time,
-    description: event.data.attributes.description,
+    name: event.data[0].attributes.name,
+    performers: event.data[0].attributes.performers,
+    venue: event.data[0].attributes.venue,
+    address: event.data[0].attributes.address,
+    date: event.data[0].attributes.date,
+    time: event.data[0].attributes.time,
+    description: event.data[0].attributes.description,
   });
   const [imagePreview, setImagePreview] = useState(
-    event.data?.attributes.image
-      ? (event.data?.attributes.image.data?.attributes.formats ? event.data?.attributes.image.data?.attributes.formats.thumbnail.url : event.data?.attributes.image.data?.attributes.url)
+    event.data[0].attributes.image
+      ? (event.data[0].attributes.image.data?.attributes.formats ? event.data[0].attributes.image.data?.attributes.formats.thumbnail.url : event.data[0].attributes.image.data?.attributes.url)
       : null
   );
   const [showModal, setShowModal] = useState(false);
@@ -61,7 +61,7 @@ const EditEventsPage = ({ event, id }) => {
   const imageUploaded = async(e) => {
     const res = await fetch(`https://music-events-backend.onrender.com/api/events/${id}?populate=*`);
     const event = await res.json();
-    setImagePreview(event.data?.attributes.image.data?.attributes.formats ? event.data?.attributes.image.data?.attributes.formats.thumbnail.url : event.data?.attributes.image.data?.attributes.url);
+    setImagePreview(event.data[0].attributes.image.data?.attributes.formats ? event.data[0].attributes.image.data?.attributes.formats.thumbnail.url : event.data[0].attributes.image.data?.attributes.url);
     setShowModal(false);
   }
 
@@ -175,11 +175,11 @@ const EditEventsPage = ({ event, id }) => {
 
 export default EditEventsPage;
 
-export async function getServerSideProps({ params: { id } }) {
+export async function getServerSideProps({ query: { id } }) {
   let event;
   try {
     const res = await fetch(
-      `https://music-events-backend.onrender.com/api/events/${id}?populate=*`
+      `https://music-events-backend.onrender.com/api/events?id=${id}?populate=*`
     );
     event = await res.json();
   } catch (error) {
