@@ -55,7 +55,6 @@ export async function getServerSideProps({ query: { term } }) {
     events = await response.json();
     events = events.data;
   } catch (error) {
-    throw new Error(error.message);
   }
   return {
     props: {
